@@ -1,0 +1,46 @@
+@model IEnumerable<CrudApp.Data.Record>
+
+<h2>Records</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var record in Model)
+        {
+            <tr>
+                <td>@record.Id</td>
+                <td>@record.Name</td>
+                <td>@record.Age</td>
+                <td>
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" name="Id" value="@record.Id" />
+                        <input type="text" name="Name" value="@record.Name" />
+                        <input type="number" name="Age" value="@record.Age" />
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="Id" value="@record.Id" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Add New Record</h3>
+<form asp-action="Create" method="post">
+    <label for="Id">Id:</label>
+    <input type="number" id="Id" name="Id" />
+    <label for="Name">Name:</label>
+    <input type="text" id="Name" name="Name" />
+    <label for="Age">Age:</label>
+    <input type="number" id="Age" name="Age" />
+    <button type="submit">Add</button>
+</form>
